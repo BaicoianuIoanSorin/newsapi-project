@@ -7,13 +7,10 @@ import {NewsApiService} from "./api/ NewsApiService";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent{
   title = 'newsapi-project';
 
   constructor(private sideBarService: NbSidebarService) {
-  }
-
-  ngOnInit() {
   }
 
   toggle() {
