@@ -17,27 +17,35 @@ import { ArrowComponent } from '../components-util/arrow/arrow.component';
 import {NewsApiService} from "./api/ NewsApiService";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {NewsComponent} from "./news/news.component";
-import { NewsRoutingModule } from './news/news-routing.module';
+import {NgxsModule} from "@ngxs/store";
+import {NewsState} from "./news/state";
+import {NewsFetchInfo} from "./news/ news.actions";
+import {NewsSelector} from "./news/news.selector";
 
 @NgModule({
   declarations: [
     AppComponent,
     ArrowComponent,
+    NewsComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NbThemeModule.forRoot({name: 'corporate'}),
+    NbThemeModule.forRoot({name: 'corporate' }),
     NbSidebarModule.forRoot(),
+    NgxsModule.forFeature([
+       NewsState,
+    ]),
     NbLayoutModule,
     NbEvaIconsModule,
     NbCardModule,
     NbActionsModule,
     NbListModule,
   ],
-  providers: [NewsApiService],
+  providers: [NewsApiService,
+  NewsState],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
