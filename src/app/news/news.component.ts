@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {NewsApiService} from "../api/ NewsApiService";
 import {Select, Store} from "@ngxs/store";
 import {NewsFetchInfo, NewsReset} from "./ news.actions";
 import {NewsSelector} from "./news.selector";
 import {Observable} from "rxjs";
+import {NewsApiService} from "../api/ NewsApiService";
 
 @Component({
   selector: 'app-news',
@@ -25,11 +25,19 @@ export class NewsComponent implements OnInit, OnDestroy{
 
   @Select(NewsSelector.totalResults)
   totalResults$: Observable<number> | undefined;
-  constructor(private store: Store) {
+  constructor(private store: Store,
+              private newsApiService: NewsApiService) {
   }
 
-  ngOnInit()  {
-    this.store.dispatch(new NewsFetchInfo());
+  topHeadlines: any = [];
+  populateTopHeadlines: boolean = true;
+  ngOnInit(): void {
+      this.newsApiService.topHeadlines().subscribe((result) => {
+        console.log(result);
+        this.topHeadlines = result.articles;
+        this.populateTopHeadlines = false;
+        }
+      );
   }
 
   ngOnDestroy() {

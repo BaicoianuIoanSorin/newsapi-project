@@ -14,13 +14,13 @@ import {
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ArrowComponent } from '../components-util/arrow/arrow.component';
-import {NewsApiService} from "./api/ NewsApiService";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from "@angular/common/http";
 import {NewsComponent} from "./news/news.component";
 import {NgxsModule} from "@ngxs/store";
 import {NewsState} from "./news/state";
-import {NewsFetchInfo} from "./news/ news.actions";
-import {NewsSelector} from "./news/news.selector";
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import {NewsApiKeyConfig, NgnewsModule} from "angular-news-api";
+import {NewsApiService} from "./api/ NewsApiService";
 
 @NgModule({
   declarations: [
@@ -35,9 +35,12 @@ import {NewsSelector} from "./news/news.selector";
     BrowserAnimationsModule,
     NbThemeModule.forRoot({name: 'corporate' }),
     NbSidebarModule.forRoot(),
-    NgxsModule.forFeature([
-       NewsState,
-    ]),
+    NgxsModule.forRoot([NewsState], {
+      developmentMode: true
+    }),
+    NgxsLoggerPluginModule.forRoot({
+      disabled: false
+    }),
     NbLayoutModule,
     NbEvaIconsModule,
     NbCardModule,

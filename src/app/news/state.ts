@@ -1,12 +1,13 @@
 import {Injectable} from "@angular/core";
-import {NewsApiService} from "../api/ NewsApiService";
 import {Action, State, StateContext} from "@ngxs/store";
 import {NewsFetchInfo, NewsReset} from "./ news.actions";
 import produce from "immer";
+import {Article, TopHeadlinesResponse} from "angular-news-api";
+import {NewsApiService} from "../api/ NewsApiService";
 
 export interface NewsPageStateModel {
   isFetching: boolean;
-  news: any[];
+  news: Article[];
   totalResults: number;
   isStatusOK: boolean;
 }
@@ -25,6 +26,9 @@ export const defaultsState: NewsPageStateModel = {
 
 @Injectable()
 export class NewsState {
+
+  topHeadlinesResults: any = [];
+
   constructor(
     private newsApiService: NewsApiService
   ) {
@@ -42,24 +46,16 @@ export class NewsState {
 
     setState(newState);
 
-    let result: any = null;
-
-    try {
-      result = await this.newsApiService.topHeadlines();
-    } catch (e ) {
-      console.log(` error: ${e}`);
-    }
+    this.newsApiService.topHeadlines().subscribe((result) => {
+      this.topHeadlinesResults = result.articles;
+    });
 
     newState = produce(currentState, draft => {
       draft.isFetching = false;
-      if(result != null) {
-          draft.news = result.articles;
-          draft.totalResults = result.totalResults;
-          draft.isStatusOK = result.status == 'ok';
+      if(this.topHeadlinesResults !== null) {
+        draft.news = this.topHeadlinesResults.articles;
       }
     })
-
-    console.log('asdadas')
     setState(newState);
   }
 
