@@ -1,25 +1,27 @@
 
-<ng-container *ngIf="isFetching$ | async; then isFetching; else newsFetched">
-  <nb-list *ngFor="let article of news$ | async">
-    <nb-list-item>
-      <nb-card>
-        <nb-card-header>
-          {{ article.title }}
-        </nb-card-header>
-        <nb-card-body>
-          <img src="{{ article.urlToImage }}">
-        </nb-card-body>
-      </nb-card>
-    </nb-list-item>
-  </nb-list>
-</ng-container>
-
-<ng-template #isFetching>
-  <div>
-    is Loading...
-  </div>
-</ng-template>
-
-<ng-template #newsFetched>
-
-</ng-template>
+  <ng-container class="container">
+    <nb-list *ngFor="let article of topHeadlines"
+             class="">
+      <nb-list-item>
+        <nb-flip-card>
+          <nb-card-front>
+            <nb-card accent="danger">
+              <nb-card-header>
+                {{ article.title }}
+              </nb-card-header>
+              <nb-card-body class="front-card-body">
+                {{ article.description }}
+              </nb-card-body>
+            </nb-card>
+          </nb-card-front>
+          <nb-card-back>
+            <nb-card>
+              <nb-card-body>
+                <img style="width: 200px" src="{{ article.urlToImage }}">
+              </nb-card-body>
+            </nb-card>
+          </nb-card-back>
+        </nb-flip-card>
+      </nb-list-item>
+    </nb-list>
+  </ng-container>

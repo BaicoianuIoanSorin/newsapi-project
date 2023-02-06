@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NbSidebarService} from "@nebular/theme";
-import {NewsApiService} from "./api/ NewsApiService";
+import {MenuItem} from "./constants";
 
 @Component({
   selector: 'app-root',
@@ -9,6 +9,10 @@ import {NewsApiService} from "./api/ NewsApiService";
 })
 export class AppComponent{
   title = 'newsapi-project';
+
+  GENERAL_MENU_ITEMS: MenuItem[] = [
+    new MenuItem("/news","News")
+  ];
 
   constructor(private sideBarService: NbSidebarService) {
   }

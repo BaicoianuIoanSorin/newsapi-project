@@ -1,13 +1,15 @@
 <nb-layout>
 
-  <nb-layout-header subheader>
-      <arrow class="arrow-design" (click)="toggle()"></arrow>
-
+  <nb-layout-header fixed subheader>
   </nb-layout-header>
-
-  <nb-sidebar></nb-sidebar>
+  <nb-sidebar>
+    <div *ngFor="let routerLink of GENERAL_MENU_ITEMS">
+      <a [routerLink]="routerLink.link">{{routerLink.name}}</a>
+    </div>
+  </nb-sidebar>
 
 
   <nb-layout-column class="colored-column-basic">
-    <a routerLink="/news">adsada</a><router-outlet></router-outlet></nb-layout-column>
+    <router-outlet></router-outlet>
+  </nb-layout-column>
 </nb-layout>
