@@ -9,8 +9,8 @@
     "test": "ng test"
   },
   "private": true,
-  "dependencies": { hjh
-    "@angular/animations": "^15.1.0",  nkhjkh
+  "dependencies": {
+    "@angular/animations": "^15.1.0",
     "@angular/cdk": "^14.0.0",
     "@angular/common": "^15.1.0",
     "@angular/compiler": "^15.1.0",
