@@ -10,7 +10,7 @@
   },
   "private": true,
   "dependencies": { hjh
-    "@angular/animations": "^15.1.0",
+    "@angular/animations": "^15.1.0",  nkhjkh
     "@angular/cdk": "^14.0.0",
     "@angular/common": "^15.1.0",
     "@angular/compiler": "^15.1.0",
