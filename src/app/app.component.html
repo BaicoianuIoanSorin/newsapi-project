@@ -1,11 +1,6 @@
 <nb-layout>
-
-  <nb-layout-header fixed subheader>
-  </nb-layout-header>
   <nb-sidebar>
-    <div *ngFor="let routerLink of GENERAL_MENU_ITEMS">
-      <a [routerLink]="routerLink.link">{{routerLink.name}}</a>
-    </div>
+    <nb-menu [items]="GENERAL_MENU_ITEMS"></nb-menu>
   </nb-sidebar>
 
 

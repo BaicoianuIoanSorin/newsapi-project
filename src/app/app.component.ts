@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NbSidebarService} from "@nebular/theme";
-import {MenuItem} from "./constants";
+import {NbMenuItem, NbSidebarService} from "@nebular/theme";
 
 @Component({
   selector: 'app-root',
@@ -10,8 +9,17 @@ import {MenuItem} from "./constants";
 export class AppComponent{
   title = 'newsapi-project';
 
-  GENERAL_MENU_ITEMS: MenuItem[] = [
-    new MenuItem("/news","News")
+  GENERAL_MENU_ITEMS: NbMenuItem[] = [
+  {
+    title: 'Home',
+    link: '/',
+    icon: 'home-outline'
+  },
+  {
+    title: 'News',
+    link: 'news',
+    icon: 'book-open-outline'
+  },
   ];
 
   constructor(private sideBarService: NbSidebarService) {

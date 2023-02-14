@@ -1,27 +1,35 @@
 
-  <ng-container class="container">
-    <nb-list *ngFor="let article of topHeadlines"
-             class="">
-      <nb-list-item>
-        <nb-flip-card>
+<nb-search type="rotate-layout"></nb-search>
+
+  <ng-container class="news-container">
+    <nb-card *ngFor="let article of topHeadlines">
+          <nb-card-header class="header">
+            <img src="{{article.urlToImage}}"/>
+          </nb-card-header>
+          <nb-card-body>
+            {{ article.description }}
+          </nb-card-body>
+          <nb-card-footer>
+            <button nbButton status="basic" (click)="redirectToNewsPage(article.url)">Goto</button>
+          </nb-card-footer>
+        </nb-card>
+        <!-- <nb-flip-card>
           <nb-card-front>
             <nb-card accent="danger">
               <nb-card-header>
                 {{ article.title }}
               </nb-card-header>
               <nb-card-body class="front-card-body">
-                {{ article.description }}
+                <img style="width: auto" src="{{ article.urlToImage }}">
               </nb-card-body>
             </nb-card>
           </nb-card-front>
           <nb-card-back>
             <nb-card>
               <nb-card-body>
-                <img style="width: 200px" src="{{ article.urlToImage }}">
+                {{ article.description }}
               </nb-card-body>
             </nb-card>
           </nb-card-back>
-        </nb-flip-card>
-      </nb-list-item>
-    </nb-list>
+        </nb-flip-card> -->
   </ng-container>

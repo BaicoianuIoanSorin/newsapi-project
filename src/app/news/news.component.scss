@@ -1,8 +1,19 @@
-.front-card-body {
-  margin: 0.5rem;
-  padding: 2rem;
+.news-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 250px);
+  grid-auto-rows: auto;
+  grid-gap: 1rem;
 }
 
-nb-list-item {
-  width: max-content;
+nb-card {
+  width: 400px;
+  align-content: center;
+  border: 2px solid #e7e7e7;
+  border-radius: 4px;
+  padding: .5rem;
+  
+  img {
+    width: 300px;
+  }
 }
+
