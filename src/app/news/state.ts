@@ -4,17 +4,19 @@ import {NewsFetchInfo, NewsReset} from "./ news.actions";
 import produce from "immer";
 import {Article, TopHeadlinesResponse} from "angular-news-api";
 import {NewsApiService} from "../api/ NewsApiService";
+import {Menu} from "@angular/cdk/menu";
+import {Main} from "../model/main";
 
 export interface NewsPageStateModel {
   isFetching: boolean;
-  news: Article[];
+  news: any;
   totalResults: number;
   isStatusOK: boolean;
 }
 
 export const defaultsState: NewsPageStateModel = {
   isFetching: false,
-  news: [],
+  news: null,
   totalResults: 0,
   isStatusOK: false
 }
@@ -27,7 +29,7 @@ export const defaultsState: NewsPageStateModel = {
 @Injectable()
 export class NewsState {
 
-  topHeadlinesResults: any = [];
+  topHeadlinesResults: Main | undefined;
 
   constructor(
     private newsApiService: NewsApiService
@@ -46,15 +48,13 @@ export class NewsState {
 
     setState(newState);
 
-    this.newsApiService.topHeadlines().subscribe((result) => {
-      this.topHeadlinesResults = result.articles;
-    });
-
     newState = produce(currentState, draft => {
       draft.isFetching = false;
-      if(this.topHeadlinesResults !== null) {
-        draft.news = this.topHeadlinesResults.articles;
-      }
+      this.newsApiService.topHeadlines().subscribe((result) => {
+        let stringifyJson = JSON.stringify(result);
+        console.log(stringifyJson);
+        draft.news = JSON.parse(stringifyJson);
+      });
     })
     setState(newState);
   }

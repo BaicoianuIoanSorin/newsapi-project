@@ -13,6 +13,22 @@ export class NewsSelector {
   }
 
   @Selector([NewsState])
+  static id(state: NewsPageStateModel) {
+    return state.news.id;
+  }
+
+  @Selector([NewsState])
+  static nameOfNews(state: NewsPageStateModel) {
+    return state.news.name;
+  }
+
+  @Selector([NewsState])
+  static args(state: NewsPageStateModel) {
+    return state.news.args;
+  }
+
+
+  @Selector([NewsState])
   static totalResults(state: NewsPageStateModel) {
     return state.totalResults;
   }

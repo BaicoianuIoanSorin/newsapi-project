@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 import {NewsApiService} from "../api/ NewsApiService";
 import { DOCUMENT } from '@angular/common';
 import { NbSearchService } from '@nebular/theme';
+import {Main} from "../model/main";
 
 @Component({
   selector: 'app-news',
@@ -17,7 +18,16 @@ export class NewsComponent implements OnInit, OnDestroy{
   alive = true;
 
   @Select(NewsSelector.news)
-  news$: Observable<any[]> | undefined;
+  news$: Observable<Main> | undefined;
+
+  @Select(NewsSelector.nameOfNews)
+  nameOfNews$: Observable<string> | undefined;
+
+  @Select(NewsSelector.id)
+  id$: Observable<string> | undefined;
+
+  @Select(NewsSelector.args)
+  args$: Observable<string> | undefined;
 
   @Select(NewsSelector.isFetching)
   isFetching$: Observable<boolean> | undefined;
@@ -34,24 +44,9 @@ export class NewsComponent implements OnInit, OnDestroy{
               private newsApiService: NewsApiService) {
   }
 
-
-  topHeadlines: any = [];
   populateTopHeadlines: boolean = true;
   ngOnInit(): void {
-      this.newsApiService.topHeadlines().subscribe((result) => {
-        console.log(result);
-        this.topHeadlines = result.articles;
-        this.populateTopHeadlines = false;
-        }
-      );
-
-      this.nbSearchService.onSearchSubmit()
-      .subscribe((data: any) => {
-        this.newsApiService.everythingWithSpecificTopic(data.term).subscribe((result) => {
-          this.topHeadlines = result.articles;
-          this.populateTopHeadlines = false;
-        })
-      })
+    this.store.dispatch(new NewsFetchInfo());
   }
 
   redirectToNewsPage(url : string) {

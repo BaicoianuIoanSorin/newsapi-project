@@ -2,15 +2,15 @@
 <nb-search type="rotate-layout"></nb-search>
 
   <div class="news-container">
-    <nb-card *ngFor="let article of topHeadlines">
+    <nb-card>
           <nb-card-header class="header">
-            <img src="{{article.urlToImage}}"/>
+
           </nb-card-header>
-          <nb-card-body>
-            {{ article.description }}
+          <nb-card-body *ngIf="news$ | async ">
+            {{ args$ | async}}
           </nb-card-body>
           <nb-card-footer>
-            <button nbButton status="basic" (click)="redirectToNewsPage(article.url)">Goto</button>
+<!--            <button nbButton status="basic" (click)="redirectToNewsPage(article.url)">Goto</button>-->
           </nb-card-footer>
         </nb-card>
         <!-- <nb-flip-card>
